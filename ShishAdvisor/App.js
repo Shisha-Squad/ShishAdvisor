@@ -1,13 +1,17 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
 
 export default function App() {
   console.log("running!!");
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <Text>Find and rate shisha places!</Text>
+      <Image 
+        fadeDuration={2000}
+        source={require('./assets/shishaicon.jpg')
+      }/>
       <StatusBar style="auto" />
-    </View>
+    </SafeAreaView>
   );
 }
 
