@@ -4,11 +4,10 @@ import ViewImageScreen from './app/screens/ViewImageScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 
 import AppText from './app/components/AppText';
-import AppButton from './app/components/AppButton';
+import Card from './app/components/Card';
 
 import {MaterialCommunityIcons} from '@expo/vector-icons';
 import { Fragment } from 'react/cjs/react.development';
-
 
 export default function App() {
     return (
@@ -17,9 +16,8 @@ export default function App() {
             {/* <MaterialCommunityIcons name="email" /> */}
             {/* <AppText>tst</AppText> */}
             {/* <ViewImageScreen/> */}
-            <AppButton title="login" onPress={() => console.log("tapped")}>
-
-            </AppButton>
+            {/* <AppButton title="login" onPress={() => console.log("tapped")} /> */}
+            <Card title="test title" subtitle="100$" image={require('./app/assets/places/whys1.jpg')}/>
         </Fragment>
     ); 
 }
