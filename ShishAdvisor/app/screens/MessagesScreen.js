@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, FlatList, SafeAreaView, Platform, StatusBar } from 'react-native'
-import React from 'react'
+import React, { useState }   from 'react'
 import ListItem from '../components/ListItem'
 
 import Constants from 'expo-constants'
@@ -7,7 +7,7 @@ import Screen from '../components/Screen'
 import ListItemSeparator from '../components/ListItemSeparator'
 import ListItemDeleteAction from '../components/ListItemDeleteAction'
 
-var messages = [
+const initialMessages = [
     {
         id: 1,
         title: 'T1',
@@ -34,12 +34,15 @@ Array.prototype.removeByValue = function (val) {
     return this;
   }
 
-const handleDelete = (_id) => {
-    console.log("delete ", _id);
-    messages.removeByValue(messages.find(ob => ob.id == _id));
-}
-
 export default function MessagesScreen() {
+
+  const [messages, setMessages] = useState(initialMessages);
+
+  const handleDelete = (message) => {
+    console.log('delete ', message)
+    setMessages(messages.filter(m => m.id !== message.id));
+  }
+
   return (
     <Screen>
       <FlatList 
@@ -50,7 +53,7 @@ export default function MessagesScreen() {
             subTitle={item.description}
             image={item.image}
             onPress={() => {console.log("message pressed ", item)}}
-            onDelete={() => {handleDelete(item.id)}}
+            onDelete={() => {handleDelete(item)}}
 
             // renderRightActions={() => 
             //     <ListItemDeleteAction onPress={() => console.log("message swuped")} />
