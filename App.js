@@ -51,4 +51,4 @@ export default function App() {
             {<AppTextInput placeholder="Username" icon ="email"/>}
         </Fragment>
     ); 
-}
+}//test
