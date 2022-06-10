@@ -10,6 +10,8 @@ import {MaterialCommunityIcons} from '@expo/vector-icons';
 import { Fragment } from 'react/cjs/react.development';
 import MessagesScreen from './app/screens/MessagesScreen';
 import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
+import Screen from './app/components/Screen';
+import Icon from './app/components/Icon';
 
 export default function App() {
     return (
@@ -23,7 +25,10 @@ export default function App() {
             {/* {<Card title="test title" subtitle="100$" image={require('./app/assets/places/whys1.jpg')}/>} */}
 
             {/* <ListingDetailsScreen /> */}
-            {<MessagesScreen />}
+            {/* {<MessagesScreen />} */}
+            {<Screen>
+                <Icon name="email"></Icon>
+            </Screen>}
         </Fragment>
     ); 
 }
