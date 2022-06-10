@@ -10,14 +10,14 @@ import ListItemDeleteAction from '../components/ListItemDeleteAction'
 const initialMessages = [
     {
         id: 1,
-        title: 'T1',
-        description: 'D1',
+        title: 'Abdul Haloumni',
+        description: 'Hello, is this good shisha?',
         image: require('../assets/shops/narghilea_egipteana.png')
     },
     {
         id: 2,
-        title: 'T2',
-        description: 'D2',
+        title: 'Daniel Cirlan',
+        description: 'Good morning',
         image: require('../assets/shops/narghilea_egipteana.png')
     },
 ]
@@ -37,6 +37,7 @@ Array.prototype.removeByValue = function (val) {
 export default function MessagesScreen() {
 
   const [messages, setMessages] = useState(initialMessages);
+  const [refreshing, setRefreshing] = useState(false);
 
   const handleDelete = (message) => {
     console.log('delete ', message)
@@ -58,7 +59,18 @@ export default function MessagesScreen() {
             // renderRightActions={() => 
             //     <ListItemDeleteAction onPress={() => console.log("message swuped")} />
         />} 
-        ItemSeparatorComponent={ListItemSeparator} 
+        ItemSeparatorComponent={ListItemSeparator}
+        refreshing = {refreshing}
+        onRefresh={() => {
+          setMessages([
+            {
+              id: 2,
+              title: 'Daniel Cirlan',
+              description: 'Good morning',
+              image: require("../assets/shops/narghilea_egipteana.png"),
+            },
+          ]);
+        }}
       />
     </Screen>
   )
