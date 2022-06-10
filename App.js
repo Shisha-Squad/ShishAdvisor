@@ -15,8 +15,17 @@ import Icon from './app/components/Icon';
 import ListItem from './app/components/ListItem';
 import AccountScreen from './app/screens/AccountScreen';
 import AppTextInput from './app/components/AppTextInput';
+import AppPicker from './app/components/AppPicker';
+import { useState } from 'react';
+
+const categories = [
+    {label: "Love66", value: 1},
+    {label: "Niculae", value: 2},
+    {label: "Apple", value: 3},
+]
 
 export default function App() {
+    const [category, setCategory] = useState(categories[0]);
     return (
         <Fragment>
             {/* { <WelcomeScreen/>} */}
@@ -34,6 +43,11 @@ export default function App() {
                 IconComponent={<Icon name="email"></Icon>}/>
             </Screen>} */}
             {/* {<AccountScreen/>} */}
+            {<AppPicker 
+                selectedItem={category}
+                onSelectItem={item => setCategory(item)}
+                placeholder="Category"
+                items = {categories}/>}
             {<AppTextInput placeholder="Username" icon ="email"/>}
         </Fragment>
     ); 
