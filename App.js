@@ -14,6 +14,7 @@ import Screen from './app/components/Screen';
 import Icon from './app/components/Icon';
 import ListItem from './app/components/ListItem';
 import AccountScreen from './app/screens/AccountScreen';
+import AppTextInput from './app/components/AppTextInput';
 
 export default function App() {
     return (
@@ -32,7 +33,8 @@ export default function App() {
                 <ListItem title="Title" description="Nicu"
                 IconComponent={<Icon name="email"></Icon>}/>
             </Screen>} */}
-            {<AccountScreen/>}
+            {/* {<AccountScreen/>} */}
+            {<AppTextInput placeholder="Username" icon ="email"/>}
         </Fragment>
     ); 
 }
