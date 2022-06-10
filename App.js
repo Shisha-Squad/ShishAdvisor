@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
 import ViewImageScreen from './app/screens/ViewImageScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
+import ListingEditScreen from "./app/screens/ListingEditScreen";
+
 
 import AppText from './app/components/AppText';
 import Card from './app/components/Card';
@@ -43,12 +45,13 @@ export default function App() {
                 IconComponent={<Icon name="email"></Icon>}/>
             </Screen>} */}
             {/* {<AccountScreen/>} */}
-            {<AppPicker 
+            {/* {<AppPicker 
                 selectedItem={category}
                 onSelectItem={item => setCategory(item)}
                 placeholder="Category"
                 items = {categories}/>}
-            {<AppTextInput placeholder="Username" icon ="email"/>}
+            {<AppTextInput placeholder="Username" icon ="email"/>} */}
+            {<ListingEditScreen />}
         </Fragment>
     ); 
 }//test
