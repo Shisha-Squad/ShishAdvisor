@@ -13,6 +13,7 @@ import ListingDetailsScreen from './app/screens/ListingDetailsScreen';
 import Screen from './app/components/Screen';
 import Icon from './app/components/Icon';
 import ListItem from './app/components/ListItem';
+import AccountScreen from './app/screens/AccountScreen';
 
 export default function App() {
     return (
@@ -27,10 +28,11 @@ export default function App() {
 
             {/* <ListingDetailsScreen /> */}
             {/* {<MessagesScreen />} */}
-            {<Screen>
+            {/* {<Screen>
                 <ListItem title="Title" description="Nicu"
                 IconComponent={<Icon name="email"></Icon>}/>
-            </Screen>}
+            </Screen>} */}
+            {<AccountScreen/>}
         </Fragment>
     ); 
 }
