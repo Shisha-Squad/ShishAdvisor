@@ -23,6 +23,7 @@ import React, {useEffect } from 'react';
 import * as ImagePicker from 'expo-image-picker';
 import * as Permissions from 'expo-permissions';
 import ImageInput from './app/components/ImageInput';
+import ImageInputList from './app/components/ImageInputList';
 
 const categories = [
     {label: "Love66", value: 1},
@@ -31,56 +32,46 @@ const categories = [
 ]
 
 export default function App() {
-    const [category, setCategory] = useState(categories[0]);
-    const [imageUri, setImageUri] = useState();
+    return <ListingEditScreen/>;
+    // const [imageUris, setImageUris] = useState([]);
 
-    const requestPermission = async() => {
-        const {granted} = await ImagePicker.requestCameraPermissionsAsync();
-        if (!granted) alert('You need permission to acces the library!');
-    };
+    // const handleAdd = uri => {
+    //     setImageUris([...imageUris, uri]);
+    // }
 
-    useEffect(() => {
-        requestPermission();
-    }, []);
+    // const handleRemove = uri => {
+    //     setImageUris(imageUris.filter(imageUri => imageUri !== uri));
+    // }
 
-    const selectImage = async () => {
-        try {
-            const result = await ImagePicker.launchImageLibraryAsync();
-            if (!result.cancelled) 
-                setImageUri(result.uri);
-        } catch (error) {
-            console.log('Error reading an image', error);
-        }
-    };
-
-    return (
-        <Fragment>
-            {/* { <WelcomeScreen/>} */}
+    // return (
+    //     <Fragment>
+    //         {/* { <WelcomeScreen/>} */}
             
-            {/* <MaterialCommunityIcons name="email" /> */}
-            {/* <AppText>tst</AppText> */}
-            {/* <ViewImageScreen/> */}
-            {/* <AppButton title="login" onPress={() => console.log("tapped")} /> */}
-            {/* {<Card title="test title" subtitle="100$" image={require('./app/assets/places/whys1.jpg')}/>} */}
+    //         {/* <MaterialCommunityIcons name="email" /> */}
+    //         {/* <AppText>tst</AppText> */}
+    //         {/* <ViewImageScreen/> */}
+    //         {/* <AppButton title="login" onPress={() => console.log("tapped")} /> */}
+    //         {/* {<Card title="test title" subtitle="100$" image={require('./app/assets/places/whys1.jpg')}/>} */}
 
-            {/* <ListingDetailsScreen /> */}
-            {/* {<MessagesScreen />} */}
-            {<Screen>
-                {/* <ListItem title="Title" description="Nicu"
-                IconComponent={<Icon name="email"></Icon>} /> */}
-                <ImageInput 
-                    imageUri={imageUri}
-                    onChangeImage={(uri) => setImageUri(uri)} 
-                />
-            </Screen>}
-            {/* {<AccountScreen/>} */}
-            {/* {<AppPicker 
-                selectedItem={category}
-                onSelectItem={item => setCategory(item)}
-                placeholder="Category"
-                items = {categories}/>}
-                {<AppTextInput placeholder="Username" icon ="email"/>} */}
-            {/* {<ListingEditScreen/>} */}
-        </Fragment>
-    ); 
+    //         {/* <ListingDetailsScreen /> */}
+    //         {/* {<MessagesScreen />} */}
+    //         {<Screen>
+    //             {/* <ListItem title="Title" description="Nicu"
+    //             IconComponent={<Icon name="email"></Icon>} /> */}
+    //             <ImageInputList 
+    //                 imageUris={imageUris}
+    //                 onAddImage={handleAdd}
+    //                 onRemoveImage={handleRemove}
+    //             />
+    //         </Screen>}
+    //         {/* {<AccountScreen/>} */}
+    //         {/* {<AppPicker 
+    //             selectedItem={category}
+    //             onSelectItem={item => setCategory(item)}
+    //             placeholder="Category"
+    //             items = {categories}/>}
+    //             {<AppTextInput placeholder="Username" icon ="email"/>} */}
+    //         {/* {<ListingEditScreen/>} */}
+    //     </Fragment>
+    // ); 
 }//test
