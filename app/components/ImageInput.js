@@ -1,65 +1,82 @@
-import React, { useEffect } from 'react';
-import { View, StyleSheet, TouchableWithoutFeedback, Alert } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import * as ImagePicker from 'expo-image-picker';
-import { Image } from 'react-native';
-import colors from '../config/colors';
+import React, { useEffect } from "react"
+import {
+    Alert,
+    Image,
+    StyleSheet,
+    TouchableWithoutFeedback,
+    View,
+} from "react-native"
+import * as ImagePicker from "expo-image-picker"
+import { MaterialCommunityIcons } from "@expo/vector-icons"
 
-function ImageInput({imageUri, onChangeImage}) {
+import defaultStyles from "../config/styles"
+
+const ImageInput = ({ image, onImageChange, size = 100 }) => {
     useEffect(() => {
-        requestPermission();
+        const requestPermission = async () => {
+            const {
+                granted,
+            } = await ImagePicker.requestMediaLibraryPermissionsAsync()
+            if (!granted)
+                alert("Please grant access permission for media library")
+        }
+        requestPermission()
     }, [])
 
-    const requestPermission = async() => {
-        const {granted} = await ImagePicker.requestCameraPermissionsAsync();
-        if (!granted) alert('You need permission to acces the library!');
-    };
+    const selectImage = async () => {
+        try {
+            const result = await ImagePicker.launchImageLibraryAsync({
+                mediaTypes: ImagePicker.MediaTypeOptions.Images,
+                quality: 0.5,
+            })
+            if (!result.cancelled) onImageChange(result.uri)
+        } catch (error) {
+            console.error({ ImageError: error })
+        }
+    }
 
     const handlePress = () => {
-        if (!imageUri) selectImage();
-        else Alert.alert('Delete', 'Are you sure you want to delete this image?', [
-            {text: 'Yes', onPress: () => onChangeImage(null)},
-            {text: 'No'},
-    ])
-  }
-
-  const selectImage = async () => {
-    try {
-        const result = await ImagePicker.launchImageLibraryAsync({
-            mediaTypes: ImagePicker.MediaTypeOptions.Images,
-            quality: 0.5,
-        });
-        if (!result.cancelled) 
-            onChangeImage(result.uri);
-    } catch (error) {
-        console.log('Error reading an image', error);
+        if (!image) {
+            selectImage()
+        } else {
+            Alert.alert(
+                "Delete",
+                "Are you sure you want to delete this image?",
+                [
+                    { text: "Yes", onPress: () => onImageChange(null) },
+                    { text: "No" },
+                ]
+            )
+        }
     }
-};
-  
-  return (
-    <TouchableWithoutFeedback onPress={handlePress}>
-    <View style={styles.container}>
-        {!imageUri && (<MaterialCommunityIcons color={colors.medium} name='camera' size={40}/>)}
-        {imageUri && <Image source={{ uri: imageUri }} style={styles.image}/>}
-    </View>
-    </TouchableWithoutFeedback>
-  );
+
+    return (
+        <TouchableWithoutFeedback onPress={handlePress}>
+            <View style={[styles.container, { height: size, width: size }]}>
+                {image ? (
+                    <Image source={{ uri: image }} style={styles.image} />
+                ) : (
+                    <MaterialCommunityIcons name="camera" style={styles.icon} />
+                )}
+            </View>
+        </TouchableWithoutFeedback>
+    )
 }
 
 const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    backgroundColor: colors.light,
-    borderRadius: 15,
-    height: 100,
-    justifyContent: 'center',
-    width: 100,
-    overflow: 'hidden',
-  },
-  image: {
-    width: '100%',
-    height: '100%',
-  }
-});
+    container: {
+        ...defaultStyles.formField,
+        borderRadius: 15,
+        justifyContent: "center",
+    },
+    icon: {
+        fontSize: 40,
+        color: defaultStyles.colors.medium,
+    },
+    image: {
+        height: "100%",
+        width: "100%",
+    },
+})
 
-export default ImageInput;
+export default ImageInput
