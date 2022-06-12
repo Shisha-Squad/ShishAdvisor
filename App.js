@@ -3,7 +3,10 @@ import { StyleSheet, Text, View, Image, SafeAreaView } from 'react-native';
 import ViewImageScreen from './app/screens/ViewImageScreen';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import ListingEditScreen from "./app/screens/ListingEditScreen";
+import { NavigationContainer } from "@react-navigation/native"
 
+import { AuthNavigator, TabNavigator } from "./app/navigation"
+import navigationTheme from "./app/navigation/theme"
 
 import AppText from './app/components/AppText';
 import Card from './app/components/Card';
@@ -51,7 +54,10 @@ export default function App() {
                 placeholder="Category"
                 items = {categories}/>}
             {<AppTextInput placeholder="Username" icon ="email"/>} */}
-            {<ListingEditScreen />}
+            {/* {<ListingEditScreen />} */}
+            <NavigationContainer theme={navigationTheme}>
+                <TabNavigator />
+            </NavigationContainer>
         </Fragment>
     ); 
 }//test
