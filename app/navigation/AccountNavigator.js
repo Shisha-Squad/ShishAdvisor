@@ -1,16 +1,21 @@
-import { createStackNavigator } from '@react-navigation/stack';
-import React from 'react';
-import AccountScreen from '../screens/AccountScreen';
-import MessagesScreen from '../screens/MessagesScreen';
+import React from "react"
+import { createStackNavigator } from "@react-navigation/stack"
 
-const Stack = createStackNavigator();
+import AccountScreen from "../screens/Account"
+import Routes from "./routes"
+import MessagesScreen from "../screens/Messages"
+
+const Stack = createStackNavigator()
 
 const AccountNavigator = () => (
-
-    <Stack.Navigator >
-        <Stack.Screen name='Account' component={AccountScreen}/>
-        <Stack.Screen name='Messages' component={MessagesScreen}/>
+    <Stack.Navigator>
+        <Stack.Screen
+            name={Routes.ACCOUNT}
+            component={AccountScreen}
+            options={{ headerShown: false }}
+        />
+        <Stack.Screen name={Routes.MESSAGES} component={MessagesScreen} />
     </Stack.Navigator>
 )
 
-export default AccountNavigator;
+export default AccountNavigator
