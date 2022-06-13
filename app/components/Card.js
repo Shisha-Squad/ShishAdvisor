@@ -6,8 +6,8 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 
-import colors from "../config/colors";
 import Text from "./Text";
+import colors from "../config/colors";
 
 function Card({ title, subTitle, imageUrl, onPress }) {
   return (
@@ -15,8 +15,12 @@ function Card({ title, subTitle, imageUrl, onPress }) {
       <View style={styles.card}>
         <Image style={styles.image} source={{ uri: imageUrl }} />
         <View style={styles.detailsContainer}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.subTitle}>{subTitle}</Text>
+          <Text style={styles.title} numberOfLines={1}>
+            {title}
+          </Text>
+          <Text style={styles.subTitle} numberOfLines={2}>
+            {subTitle}
+          </Text>
         </View>
       </View>
     </TouchableWithoutFeedback>

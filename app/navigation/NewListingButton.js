@@ -1,7 +1,8 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
-import colors from "../config/colors";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+
+import colors from "../config/colors";
 
 function NewListingButton({ onPress }) {
   return (
@@ -19,15 +20,15 @@ function NewListingButton({ onPress }) {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.primary,
-    borderWidth: 10,
-    borderColor: colors.white,
-    height: 80,
-    width: 80,
-    borderRadius: 40,
-    bottom: 20,
     alignItems: "center",
+    backgroundColor: colors.primary,
+    borderColor: colors.white,
+    borderRadius: 40,
+    borderWidth: 10,
+    bottom: 20,
+    height: 80,
     justifyContent: "center",
+    width: 80,
   },
 });
 
