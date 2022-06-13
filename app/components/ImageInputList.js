@@ -1,40 +1,40 @@
-import React, { useRef } from "react"
-import { StyleSheet, ScrollView, View } from "react-native"
-import ImageInput from "./ImageInput"
+import React, { useRef } from "react";
+import { View, StyleSheet, ScrollView } from "react-native";
+import ImageInput from "./ImageInput";
 
-const ImageInputList = ({ onImageRemove, onImageAdd, uris }) => {
-    const scrollViewRef = useRef(null)
-
-    return (
-        <View>
-            <ScrollView
-                horizontal
-                onContentSizeChange={() => scrollViewRef.current.scrollToEnd()}
-                ref={scrollViewRef}
-                showsHorizontalScrollIndicator={false}
-                style={styles.container}
-            >
-                {uris.map((uri, index) => (
-                    <View key={`${index}_${uri}`} style={styles.image}>
-                        <ImageInput
-                            image={uri}
-                            onImageChange={() => onImageRemove(uri)}
-                        />
-                    </View>
-                ))}
-                <ImageInput onImageChange={onImageAdd} />
-            </ScrollView>
+function ImageInputList({ imageUris = [], onRemoveImage, onAddImage }) {
+  const scrollView = useRef();
+  return (
+    <View>
+      <ScrollView
+        ref={scrollView}
+        horizontal
+        onContentSizeChange={() => scrollView.current.scrollToEnd()}
+      >
+        <View style={styles.container}>
+          {imageUris.map((uri) => (
+            <View key={uri} style={styles.image}>
+              <ImageInput
+                imageUri={uri}
+                key={uri}
+                onChangeImage={() => onRemoveImage(uri)}
+              />
+            </View>
+          ))}
+          <ImageInput onChangeImage={(uri) => onAddImage(uri)} />
         </View>
-    )
+      </ScrollView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flexDirection: "row",
-    },
-    image: {
-        marginRight: 10,
-    },
-})
+  container: {
+    flexDirection: "row",
+  },
+  image: {
+    marginRight: 10,
+  },
+});
 
-export default ImageInputList
+export default ImageInputList;

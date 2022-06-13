@@ -1,19 +1,18 @@
-import React from "react"
-import { StyleSheet } from "react-native"
+import React from "react";
+import { StyleSheet } from "react-native";
+import Text from "../Text";
+import colors from "../../config/colors";
 
-import colors from "../../config/colors"
-import Text from "../Text"
+function ErrorMessage({ error, visible }) {
+  if (!visible || !error) return null;
 
-const ErrorMessage = ({ error, visible }) => {
-    if (!visible || !error) return null
-
-    return <Text style={styles.error}>{error}</Text>
+  return <Text style={styles.error}>{error}</Text>;
 }
 
 const styles = StyleSheet.create({
-    error: {
-        color: colors.danger,
-    },
-})
+  error: {
+    color: colors.danger,
+  },
+});
 
-export default ErrorMessage
+export default ErrorMessage;

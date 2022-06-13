@@ -1,131 +1,110 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StyleSheet } from "react-native";
-import * as Yup from "yup";
-import * as Location from 'expo-location';
-
-import {
-  Form,
-  FormField,
-  FormPicker as Picker,
-  SubmitButton,
-} from "../components/forms";
-import CategoryPickerItem from "../components/CategoryPickerItem";
 import Screen from "../components/Screen";
+import * as Yup from "yup";
+import { Form, FormField, FormPicker, SubmitButton } from "../components/forms";
+import CategoriesPickerItem from "../components/CategoriesPickerItem";
 import FormImagePicker from "../components/forms/FormImagePicker";
+import useLocation from "../hooks/useLocation";
+import listingsApi from "../api/listings";
+import UploadScreen from "./UploadScreen";
+import { set } from "react-native-reanimated";
 
 const validationSchema = Yup.object().shape({
   title: Yup.string().required().min(1).label("Title"),
   price: Yup.number().required().min(1).max(10000).label("Price"),
+  category: Yup.string().required().nullable().label("Category"),
   description: Yup.string().label("Description"),
-  category: Yup.object().required().nullable().label("Category"),
-  images: Yup.array().min(1, "Please select at least 1 image."),
+  images: Yup.array().min(1, "Please select at least one image."),
 });
 
 const categories = [
   {
-    backgroundColor: "#fc5c65",
-    icon: "floor-lamp",
     label: "Furniture",
     value: 1,
+    backgroundColor: "#fc5c65",
+    icon: "floor-lamp",
   },
+  { label: "Cars", value: 2, backgroundColor: "#fd9644", icon: "car" },
+  { label: "Cameras", value: 3, backgroundColor: "#fed330", icon: "camera" },
+  { label: "Games", value: 4, backgroundColor: "#26de81", icon: "cards" },
   {
-    backgroundColor: "#fd9644",
-    icon: "car",
-    label: "Cars",
-    value: 2,
-  },
-  {
-    backgroundColor: "#fed330",
-    icon: "camera",
-    label: "Cameras",
-    value: 3,
-  },
-  {
-    backgroundColor: "#26de81",
-    icon: "cards",
-    label: "Games",
-    value: 4,
-  },
-  {
-    backgroundColor: "#2bcbba",
-    icon: "shoe-heel",
     label: "Clothing",
     value: 5,
+    backgroundColor: "#2bcbba",
+    icon: "shoe-heel",
   },
+  { label: "Sports", value: 6, backgroundColor: "#45aaf2", icon: "basketball" },
   {
-    backgroundColor: "#45aaf2",
-    icon: "basketball",
-    label: "Sports",
-    value: 6,
-  },
-  {
-    backgroundColor: "#4b7bec",
-    icon: "headphones",
     label: "Movies & Music",
     value: 7,
-  },
-  {
-    backgroundColor: "#a55eea",
-    icon: "book-open-variant",
-    label: "Books",
-    value: 8,
-  },
-  {
-    backgroundColor: "#778ca3",
-    icon: "application",
-    label: "Other",
-    value: 9,
+    backgroundColor: "#4b7bec",
+    icon: "headphones",
   },
 ];
 
 function ListingEditScreen() {
-  const [location, setLocation] = useState();
+  const location = useLocation();
+  const [uploadVisible, setUploadVisible] = useState(false);
+  const [progress, setProgress] = useState(0);
 
-  const getLocation = async () => {
-    const { granted } =  await Location.requestBackgroundPermissionsAsync();
-    if( !granted) return;   // n avem permisiune pt locatie
+  const handleSubmit = async (listing, { resetForm }) => {
+    setProgress(0);
+    setUploadVisible(true);
+    const results = await listingsApi.addListing(
+      { ...listing, location },
+      (progress) => setProgress(progress)
+    );
 
-    const {coords: {latitude, longitude} } = await Location.getLastKnownPositionAsync();
-    setLocation({latitude, longitude});
-  }
-  useEffect(() => {
-    getLocation();
-  }, [])
+    if (!results.ok) {
+      setUploadVisible(false);
+      return alert("Could not save listing.");
+    }
+
+    resetForm();
+  };
+
   return (
     <Screen style={styles.container}>
+      <UploadScreen
+        onDone={() => setUploadVisible(false)}
+        progress={progress}
+        visible={uploadVisible}
+      />
       <Form
         initialValues={{
           title: "",
           price: "",
-          description: "",
           category: null,
-          images: []
+          description: "",
+          images: [],
         }}
-        onSubmit={(values) => console.log(location)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
       >
-        <FormImagePicker name="images"/>
+        <FormImagePicker name="images" />
         <FormField maxLength={255} name="title" placeholder="Title" />
         <FormField
-          keyboardType="numeric"
           maxLength={8}
+          keyboardType="numeric"
           name="price"
           placeholder="Price"
           width={120}
         />
-        <Picker
+        <FormPicker
           items={categories}
           name="category"
           numberOfColumns={3}
-          PickerItemComponent={CategoryPickerItem}
+          PickerItemComponent={CategoriesPickerItem}
           placeholder="Category"
           width="50%"
         />
         <FormField
           maxLength={255}
           multiline
-          name="description"
           numberOfLines={3}
+          autoCapitalize="none"
+          name="description"
           placeholder="Description"
         />
         <SubmitButton title="Post" />
@@ -138,5 +117,13 @@ const styles = StyleSheet.create({
   container: {
     padding: 10,
   },
+  logo: {
+    width: 80,
+    height: 80,
+    alignSelf: "center",
+    marginTop: 50,
+    marginBottom: 20,
+  },
 });
+
 export default ListingEditScreen;

@@ -1,11 +1,10 @@
 import React from "react";
-import { View, Image, StyleSheet } from "react-native";
-
-import colors from "../config/colors";
-import ListItem from "../components/lists/ListItem";
+import { View, StyleSheet, Image } from "react-native";
 import Text from "../components/Text";
+import colors from "../config/colors";
+import { ListItem } from "../components/lists";
 
-function ListingDetailsScreen({route}) {
+function ListingDetailsScreen({ route }) {
   const listing = route.params;
 
   return (
