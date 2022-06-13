@@ -1,30 +1,26 @@
-import { useEffect, useState } from "react"
-import * as Location from "expo-location"
+import { useEffect, useState } from "react";
+import * as Location from "expo-location";
 
-const useLocation = () => {
-    const [location, setLocation] = useState(null)
-    const [error, setError] = useState(null)
+let useLocation;
+export default useLocation = () => {
+  const [location, setLocation] = useState();
 
-    useEffect(() => {
-        const getLocation = async () => {
-            try {
-                const { granted } = await Location.requestPermissionsAsync()
-                if (!granted) return
+  const getLocation = async () => {
+    try {
+      const { granted } = await Location.requestPermissionsAsync();
+      if (!granted) return;
+      const {
+        coords: { latitude, longitude },
+      } = await Location.getLastKnownPositionAsync();
+      setLocation({ latitude, longitude });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-                const {
-                    coords: { latitude, longitude },
-                } = await Location.getLastKnownPositionAsync()
+  useEffect(() => {
+    getLocation();
+  }, []);
 
-                setLocation({ latitude, longitude })
-            } catch (error) {
-                setError(error.message)
-            }
-        }
-
-        getLocation()
-    }, [])
-
-    return [location, error]
-}
-
-export default useLocation
+  return location;
+};

@@ -1,25 +1,27 @@
 import React, { useState } from "react";
-import { FlatList, StyleSheet, View } from "react-native";
-
+import { FlatList } from "react-native";
 import Screen from "../components/Screen";
 import {
-  ListItem,
-  ListItemDeleteAction,
   ListItemSeparator,
+  ListItemDeleteAction,
+  ListItem,
 } from "../components/lists";
 
 const initialMessages = [
   {
     id: 1,
-    title: "Mosh Hamedani",
-    description: "Hey! Is this item still available?",
+    title:
+      "T1 sadf adf sadf asf sad fsd fa s efs fse fs fsefsefsef sf sf fs fse fse fse fs fsef sef sef ",
+    description:
+      "D1 sadf adf sadf asf sad fsd fa s efs fse fs fsefsefsef sf sf fs fse fse fse fs fsef sef sef",
     image: require("../assets/mosh.jpg"),
   },
   {
     id: 2,
-    title: "Mosh Hamedani",
+    title:
+      "T2 sadf adf sadf asf sad fsd fa s efs fse fs fsefsefsef sf sf fs fse fse fse fs fsef sef sef",
     description:
-      "I'm interested in this item. When will you be able to post it?",
+      "D2 sadf adf sadf asf sad fsd fa s efs fse fs fsefsefsef sf sf fs fse fse fse fs fsef sef sef",
     image: require("../assets/mosh.jpg"),
   },
 ];
@@ -29,8 +31,9 @@ function MessagesScreen(props) {
   const [refreshing, setRefreshing] = useState(false);
 
   const handleDelete = (message) => {
-    // Delete the message from messages
+    // Delete the message from initialMessages
     setMessages(messages.filter((m) => m.id !== message.id));
+    // TODO Call the server
   };
 
   return (
@@ -65,7 +68,5 @@ function MessagesScreen(props) {
     </Screen>
   );
 }
-
-const styles = StyleSheet.create({});
 
 export default MessagesScreen;

@@ -1,10 +1,17 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
-
+import { View, StyleSheet } from "react-native";
 import colors from "../../config/colors";
 
-function ListItemSeparator() {
-  return <View style={styles.separator} />;
+function ListItemSeparator(props) {
+  return (
+    <View
+      style={{
+        width: "100%",
+        height: 1,
+        backgroundColor: styles.separator.backgroundColor,
+      }}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
