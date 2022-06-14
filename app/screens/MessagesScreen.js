@@ -11,18 +11,15 @@ import {
 const initialMessages = [
   {
     id: 1,
-    title:
-      "T1 sadf adf sadf asf sad fsd fa s efs fse fs fsefsefsef sf sf fs fse fse fse fs fsef sef sef ",
-    description:
-      "D1 sadf adf sadf asf sad fsd fa s efs fse fs fsefsefsef sf sf fs fse fse fse fs fsef sef sef",
+    title: "Mosh Hamedani",
+    description: "Hey! Is this item still available?",
     image: require("../assets/mosh.jpg"),
   },
   {
     id: 2,
-    title:
-      "T2 sadf adf sadf asf sad fsd fa s efs fse fs fsefsefsef sf sf fs fse fse fse fs fsef sef sef",
+    title: "Mosh Hamedani",
     description:
-      "D2 sadf adf sadf asf sad fsd fa s efs fse fs fsefsefsef sf sf fs fse fse fse fs fsef sef sef",
+      "I'm interested in this item. When will you be able to post it?",
     image: require("../assets/mosh.jpg"),
   },
 ];
