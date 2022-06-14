@@ -1,32 +1,33 @@
 import React, { useState } from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import {
-  Button,
-  FlatList,
-  Modal,
+  View,
   StyleSheet,
   TouchableWithoutFeedback,
-  View,
+  Modal,
+  Button,
+  FlatList,
 } from "react-native";
-import defaultStyles from "../config/styles";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+
 import Text from "./Text";
-import Screen from "./Screen";
+import defaultStyles from "../config/styles";
 import PickerItem from "./PickerItem";
+import Screen from "./Screen";
 
 function AppPicker({
   icon,
   items,
   numberOfColumns = 1,
   onSelectItem,
-  placeholder,
   PickerItemComponent = PickerItem,
+  placeholder,
   selectedItem,
-  width,
+  width = "100%",
 }) {
   const [modalVisible, setModalVisible] = useState(false);
 
   return (
-    <React.Fragment>
+    <>
       <TouchableWithoutFeedback onPress={() => setModalVisible(true)}>
         <View style={[styles.container, { width }]}>
           {icon && (
@@ -42,6 +43,7 @@ function AppPicker({
           ) : (
             <Text style={styles.placeholder}>{placeholder}</Text>
           )}
+
           <MaterialCommunityIcons
             name="chevron-down"
             size={20}
@@ -54,6 +56,7 @@ function AppPicker({
           <Button title="Close" onPress={() => setModalVisible(false)} />
           <FlatList
             data={items}
+            keyExtractor={(item) => item.value.toString()}
             numColumns={numberOfColumns}
             renderItem={({ item }) => (
               <PickerItemComponent
@@ -65,11 +68,10 @@ function AppPicker({
                 }}
               />
             )}
-            keyExtractor={(item) => item.value.toString()}
           />
         </Screen>
       </Modal>
-    </React.Fragment>
+    </>
   );
 }
 

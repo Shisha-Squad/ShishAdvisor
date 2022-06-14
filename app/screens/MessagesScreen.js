@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { FlatList } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
+
 import Screen from "../components/Screen";
 import {
-  ListItemSeparator,
-  ListItemDeleteAction,
   ListItem,
+  ListItemDeleteAction,
+  ListItemSeparator,
 } from "../components/lists";
 
 const initialMessages = [
@@ -31,9 +32,8 @@ function MessagesScreen(props) {
   const [refreshing, setRefreshing] = useState(false);
 
   const handleDelete = (message) => {
-    // Delete the message from initialMessages
+    // Delete the message from messages
     setMessages(messages.filter((m) => m.id !== message.id));
-    // TODO Call the server
   };
 
   return (
@@ -68,5 +68,7 @@ function MessagesScreen(props) {
     </Screen>
   );
 }
+
+const styles = StyleSheet.create({});
 
 export default MessagesScreen;
