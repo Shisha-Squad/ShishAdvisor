@@ -23,39 +23,27 @@ const validationSchema = Yup.object().shape({
 
 const categories = [
     {
-        label: "Furniture",
+        label: "Shisha Amy Deluxe",
         value: 1,
         icon: "floor-lamp",
-        backgroundColor: "red",
-    },
-    { label: "Cars", value: 2, icon: "car", backgroundColor: "green" },
-    { label: "Cameras", value: 3, icon: "camera", backgroundColor: "blue" },
-    { label: "Games", value: 4, icon: "cards-outline", backgroundColor: "red" },
-    {
-        label: "Clothing",
-        value: 5,
-        icon: "shoe-heel",
-        backgroundColor: "green",
-    },
-    {
-        label: "Sports",
-        value: 6,
-        icon: "basketball",
-        backgroundColor: "blue",
-    },
-    {
-        label: "Movies & Music",
-        value: 7,
-        icon: "music",
-        backgroundColor: "red",
-    },
-    {
-        label: "Books",
-        value: 8,
-        icon: "book-open-variant",
-        backgroundColor: "green",
-    },
-    { label: "Others", value: 9, icon: "application", backgroundColor: "blue" },
+        backgroundColor: "#fc5c65",
+        color: "white"
+      },
+      {
+        label: "Shisha Boss",
+        value: 2,
+        icon: "floor-lamp",
+        backgroundColor: "#fd9644",
+        color: "white"
+      },
+      {
+        label: "Shisha Alfaher",
+        value: 3,
+        icon: "floor-lamp",
+        backgroundColor: "#fed330",
+        color: "white"
+      },
+    { label: "Others", value: 4, icon: "application", backgroundColor: "blue" },
 ]
 
 const ListingEdit = () => {

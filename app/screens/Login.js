@@ -18,7 +18,7 @@ const Login = () => {
     return (
         <Wrapper style={styles.container}>
             <Image
-                source={require("../assets/logo-red.png")}
+                source={require("../assets/shishaicon.png")}
                 style={styles.logo}
             />
             <Form

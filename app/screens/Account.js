@@ -39,9 +39,9 @@ const Account = ({ navigation }) => {
         <Wrapper style={styles.wrapper}>
             <View style={styles.heading}>
                 <ListItem
-                    title="Mosh Hamedani"
-                    description="programmingwithmosh@gmail.com"
-                    image={require("../assets/mosh.jpg")}
+                    title="Matei Neagu"
+                    description="mateineagu@gmail.com"
+                    image={require("../assets/user.jpg")}
                 />
             </View>
             <View>

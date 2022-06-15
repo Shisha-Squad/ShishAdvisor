@@ -9,11 +9,11 @@ function WelcomeScreen({ navigation }) {
     <ImageBackground
       blurRadius={10}
       style={styles.background}
-      source={require("../assets/background.jpg")}
+      source={require("../assets/fundal.jpg")}
     >
       <View style={styles.logoContainer}>
-        <Image style={styles.logo} source={require("../assets/logo-red.png")} />
-        <Text style={styles.tagline}>Sell What You Don't Need</Text>
+        <Image style={styles.logo} source={require("../assets/shishaicon.png")} />
+        <Text style={styles.tagline}>Shisha Marketplace</Text>
       </View>
       <View style={styles.buttonsContainer}>
         <Button
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "600",
     paddingVertical: 20,
+    color: "white"
   },
 });
 

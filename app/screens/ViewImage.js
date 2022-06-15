@@ -17,7 +17,7 @@ export default function ViewImage() {
             <Image
                 style={styles.image}
                 resizeMode="contain"
-                source={require("../assets/chair.jpg")}
+                source={require("../assets/el_badi.jpg")}
             />
         </View>
     );

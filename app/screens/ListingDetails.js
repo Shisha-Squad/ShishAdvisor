@@ -17,9 +17,9 @@ const ListingDetails = ({ route }) => {
             </View>
             <View style={styles.userContainer}>
                 <ListItem
-                    image={require("../assets/mosh.jpg")}
-                    title="Mosh Hamedani"
-                    description="5 listings"
+                    image={require("../assets/user.jpg")}
+                    title="Matei Neagu"
+                    description="10 listings"
                 />
             </View>
         </View>
